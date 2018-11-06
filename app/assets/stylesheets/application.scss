@@ -6,6 +6,8 @@
 @import "modules/side-bar";
 @import "modules/chat";
 
+@import "modules/user";
+
 .wrapper{
   @include wrapper;
 }
