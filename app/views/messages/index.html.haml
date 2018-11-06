@@ -1,0 +1,16 @@
+.info
+  チャットグループが作成されました
+.wrapper
+  .side-bar
+    .header
+      = render partial: "side-header"
+    .groups
+      = render partial: "side-groups"
+
+  .chat
+    .header
+      = render partial: "chat-header"
+    .messages
+      = render partial: "chat-message"
+    .form
+      = render partial: "chat-form"
