@@ -24,9 +24,8 @@ $(function(){
   }
 
   $('#form-content').on('submit', function(e){
-    e.preventDefault();　// 送信を止める
+    e.preventDefault();
     var formData = new FormData(this);
-    console.log(this);
     var url = $(this).attr('action')
 
     $.ajax({
@@ -39,15 +38,15 @@ $(function(){
     })
 
     .done(function(data) {
-      var html = buildHTML(data); //メッセージをappendするHTMLを生成
+      var html = buildHTML(data);
       $('.messages').append(html);
       $('.form__submit').prop('disabled',false);
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
       $('#form-content')[0].reset();
-      // alert("通信成功");
      })
+
     .fail(function(){
-      alert('通信失敗'); // 通信が失敗したときの処理
+      alert('通信失敗');
       $('.form__submit').prop('disabled',false);
     })
   });
