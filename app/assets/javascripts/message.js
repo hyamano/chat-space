@@ -1,9 +1,9 @@
 $(function(){
   function buildHTML(message){
 
-  var message_html = (message.text) ? `${message.text}` : "";
+  // var message_html = (message.text) ? `${message.text}` : "";
   var image_html = (message.image.url) ? `<img class="lower-message__image" src=${ message.image.url }>` : "";
-  var html = `<div class ="message">
+  var html = `<div class ="message" message-id="${message.id}">
                 <div class ="upper-message">
                   <div class ="upper-message__user-name">
                     ${message.user_name}
@@ -14,12 +14,11 @@ $(function(){
                 </div>
                 <div class="lower-message">
                   <p class="lower-message_content">
-                    ${message_html}
+                    ${message.text}
                   </p>
                   ${image_html}
                 </div>
               </div>`
-
     return html;
   }
 
@@ -47,9 +46,13 @@ $(function(){
 
     .fail(function(){
       alert('通信失敗');
+    })
+    .always(function(){
       $('.form__submit').prop('disabled',false);
+    })
+  });
 
-          var interval = setInterval(function(){
+  var interval = setInterval(function(){
 
     var current_url = window.location.href;
     console.log(current_url);
@@ -58,7 +61,7 @@ $(function(){
     console.log(new_message);
 
   if(current_url.match(/\/groups\/\d+\/messages/)){
-    console.log("ajax通信を行う");
+    // console.log("ajax通信を行う");
 
       $.ajax({
         url: current_url,
@@ -67,7 +70,7 @@ $(function(){
         dataType: 'json',
       })
     .done(function(otherMessages){
-      console.log("結果",otherMessages);
+      // console.log("結果",otherMessages);
 
       var insertHTML = ""
 
@@ -77,8 +80,15 @@ $(function(){
           $('.messages').append(insertHTML);
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
         })
-        console.log(insertHTML);
+        // console.log(insertHTML);
+       })
+      .fail(function(){
+         alert("通信失敗");
+       })
+     }else{
+       console.log("")
+     }
 
-    })
-  },5000);
+   },5000);
+
  });
