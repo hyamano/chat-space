@@ -1,7 +1,6 @@
 $(function(){
   function buildHTML(message){
 
-  // var message_html = (message.text) ? `${message.text}` : "";
   var image_html = (message.image.url) ? `<img class="lower-message__image" src=${ message.image.url }>` : "";
   var html = `<div class ="message" message-id="${message.id}">
                 <div class ="upper-message">
@@ -53,16 +52,11 @@ $(function(){
   });
 
   var interval = setInterval(function(){
-
-    var current_url = window.location.href;
-    console.log(current_url);
-
-    var new_message = $('.message').last().attr('message-id');
-    console.log(new_message);
+  var current_url = window.location.href;
+  console.log(current_url);
+  var new_message = $('.message').last().attr('message-id');
 
   if(current_url.match(/\/groups\/\d+\/messages/)){
-    // console.log("ajax通信を行う");
-
       $.ajax({
         url: current_url,
         type: "GET",
@@ -70,25 +64,18 @@ $(function(){
         dataType: 'json',
       })
     .done(function(otherMessages){
-      // console.log("結果",otherMessages);
-
       var insertHTML = ""
-
-        otherMessages.forEach(function(message){
-
-          insertHTML = buildHTML(message);
-          $('.messages').append(insertHTML);
-          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
-        })
-        // console.log(insertHTML);
-       })
+      otherMessages.forEach(function(message){
+      insertHTML = buildHTML(message);
+      $('.messages').append(insertHTML);
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
+      })
+    })
       .fail(function(){
          alert("通信失敗");
        })
      }else{
-       console.log("")
-     }
-
-   },5000);
-
- });
+      console.log("")
+    }
+  },5000);
+});
