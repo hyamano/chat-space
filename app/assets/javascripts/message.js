@@ -68,6 +68,17 @@ $(function(){
       })
     .done(function(otherMessages){
       console.log("結果",otherMessages);
+
+      var insertHTML = ""
+
+        otherMessages.forEach(function(message){
+
+          insertHTML = buildHTML(message);
+          $('.messages').append(insertHTML);
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
+        })
+        console.log(insertHTML);
+
     })
   },5000);
  });
