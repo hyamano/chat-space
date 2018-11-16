@@ -48,6 +48,14 @@ $(function(){
     .fail(function(){
       alert('通信失敗');
       $('.form__submit').prop('disabled',false);
-    })
+
+      var interval = setInterval(function(){
+      var current_url = window.location.href;
+      console.log(current_url);
+      var new_message = $('.message').last().attr('message-id');
+      console.log(new_message);
+    }
+  }
+
+    });
   });
-});
