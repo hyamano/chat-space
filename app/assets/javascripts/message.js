@@ -41,7 +41,7 @@ $(function(){
       $('.form__submit').prop('disabled',false);
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
       $('#form-content')[0].reset();
-     })
+    })
 
     .fail(function(){
       alert('通信失敗');
@@ -52,30 +52,26 @@ $(function(){
   });
 
   var interval = setInterval(function(){
-  var current_url = window.location.href;
-  console.log(current_url);
-  var new_message = $('.message').last().attr('message-id');
+    var current_url = window.location.href;
+    var new_message = $('.message').last().attr('message-id');
 
-  if(current_url.match(/\/groups\/\d+\/messages/)){
+    if(current_url.match(/\/groups\/\d+\/messages/)){
+
       $.ajax({
         url: current_url,
         type: "GET",
         data: {id: new_message},
         dataType: 'json',
       })
-    .done(function(otherMessages){
-      var insertHTML = ""
-      otherMessages.forEach(function(message){
-      insertHTML = buildHTML(message);
-      $('.messages').append(insertHTML);
-      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
+
+      .done(function(otherMessages){
+        var insertHTML = ""
+        otherMessages.forEach(function(message){
+          insertHTML = buildHTML(message);
+          $('.messages').append(insertHTML);
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},'fast');
+        })
       })
-    })
-      .fail(function(){
-         alert("通信失敗");
-       })
-     }else{
-      console.log("")
     }
   },5000);
 });
