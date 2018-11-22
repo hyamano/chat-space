@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+lock "3.11.0"
 
-set :application, "chat-space"
-set :repo_url, "git@github.com:hyamano/chat-space.git"
+set :application, 'chat-space'
+set :repo_url, 'git@github.com:hyamano/chat-space.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -33,6 +33,19 @@ set :rbenv_ruby, '2.3.1'
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
+set :default_env, {
+  rbenv_root: "/usr/local/rbenv",
+  path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
+  AWS_ACCESS_KEY_ID: ENV["AWS_ACCESS_KEY_ID"],
+  AWS_SECRET_ACCESS_KEY: ENV["AWS_SECRET_ACCESS_KEY"]
+}
+
+set :ssh_options, auth_methods: ['publickey'],
+keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
+set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
+set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
+
+
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
 
@@ -42,10 +55,6 @@ set :rbenv_ruby, '2.3.1'
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-set :ssh_options, auth_methods: ['publickey'],
-keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
- set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
-set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
  after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
