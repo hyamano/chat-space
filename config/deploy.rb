@@ -7,8 +7,8 @@ set :repo_url, "git@github.com:hyamano/chat-space.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+# Default deploy_to directory is /var/www/chat-space
+# set :deploy_to, "/var/www/chat-space
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -23,7 +23,7 @@ set :repo_url, "git@github.com:hyamano/chat-space.git"
  # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
 
- # Default value for linked_dirs is []
+# Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
@@ -43,7 +43,7 @@ set :keep_releases, 5
 # set :ssh_options, verify_host_key: :secure
 
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
+keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
