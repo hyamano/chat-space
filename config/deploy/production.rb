@@ -43,7 +43,7 @@ server '54.250.101.176', user: 'ec2-user', roles: %w{app db web}
 # --------------
 #  set :ssh_options, {
 #    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: true,
+#    forward_agent: false,
 #    auth_methods: %w(password)
 #  }
 #
@@ -59,4 +59,3 @@ server '54.250.101.176', user: 'ec2-user', roles: %w{app db web}
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
