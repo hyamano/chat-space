@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock '~> 3.11.0'
+lock "~> 3.11.0"
 
-set :application, 'chat-space'
-set :repo_url, 'git@github.com:hyamano/chat-space.git'
+set :application, "chat-space"
+set :repo_url, "git@github.com:hyamano/chat-space.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -43,14 +43,13 @@ set :rbenv_ruby, '2.3.1'
 # set :ssh_options, verify_host_key: :secure
 
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['/Users/h_yamanoh/chat-space.pem']
-
-set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
+keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
+ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
-
-after 'deploy:publishing', 'deploy:restart'
+ after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
 end
+
