@@ -27,6 +27,9 @@ set :repo_url, 'git@github.com:hyamano/chat-space.git'
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
+set :rbenv_type, :user
+set :rbenv_ruby, '2.3.1'
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
@@ -40,9 +43,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :ssh_options, verify_host_key: :secure
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['/Users/h_yamanoh/.ssh/chat-space.pem']
-
-set :rbenv_type, :user
-set :rbenv_ruby, '2.3.1'
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
