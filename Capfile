@@ -1,4 +1,5 @@
 # Load DSL and set up stages
+require "capistrano/deploy"
 # Include default deployment tasks
 
 # Load the SCM plugin appropriate to your project:
@@ -24,7 +25,7 @@
 #
 
 require "capistrano/setup"
-require "capistrano/deploy"
+
 # require "capistrano/rvm"
  require "capistrano/rbenv"
 # require "capistrano/chruby"
