@@ -16,12 +16,13 @@ set :default_env, {
   AWS_SECRET_ACCESS_KEY: ENV["AWS_SECRET_ACCESS_KEY"]
 }
 
+set :keep_releases, 5
+
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/key_pair.pem']
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
-set :keep_releases, 5
 
 # secrets.yml用のシンボリックリンクを追加
 set :linked_files, %w{ config/secrets.yml }
@@ -31,9 +32,8 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
-end
 
-desc 'upload secrets.yml'
+  desc 'upload secrets.yml'
   task :upload do
     on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/config ]"
